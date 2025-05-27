@@ -1,0 +1,227 @@
+info:
+  description: 社員情報、スキル、研修、現場履歴、ダッシュボードを管理する社内用API
+  title: 社員管理API
+  version: 1.0.0
+openapi: 3.0.3
+paths:
+  /api/dashboard/summary:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                skillDistribution:
+                  FE: 10
+                trainingCompletionRate: 80
+          description: 成功レスポンス
+      summary: /api/dashboard/summary
+  /api/employees:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+              - department: 開発部
+                id: 1
+                name: 山田 太郎
+          description: 成功レスポンス
+      summary: /api/employees
+    post:
+      requestBody:
+        content:
+          application/json:
+            example:
+              email: string
+              hireDate: YYYY-MM-DD
+              name: string
+              sites: []
+              skills: []
+              trainings: []
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                employeeId: 101
+                status: success
+          description: 成功レスポンス
+      summary: /api/employees
+  /api/employees/{id}:
+    delete:
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                status: success
+          description: 成功レスポンス
+      summary: /api/employees/{id}
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                id: 1
+                name: 山田 太郎
+                sites: []
+                skills: []
+                trainings: []
+          description: 成功レスポンス
+      summary: /api/employees/{id}
+    put:
+      requestBody:
+        content:
+          application/json:
+            example:
+              email: string
+              name: string
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                status: success
+          description: 成功レスポンス
+      summary: /api/employees/{id}
+  /api/employees/{id}/sites:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+              - name: 東京本社
+                siteId: 1
+                startDate: '2023-01-01'
+          description: 成功レスポンス
+      summary: /api/employees/{id}/sites
+    put:
+      requestBody:
+        content:
+          application/json:
+            example:
+            - siteId: 1
+              startDate: '2023-01-01'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                status: success
+          description: 成功レスポンス
+      summary: /api/employees/{id}/sites
+  /api/employees/{id}/skills:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+              - experience: 2年
+                name: Vue.js
+                proficiency: 4
+                skillId: 1
+          description: 成功レスポンス
+      summary: /api/employees/{id}/skills
+    put:
+      requestBody:
+        content:
+          application/json:
+            example:
+            - experience: 2年
+              proficiency: 4
+              skillId: 1
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                status: success
+          description: 成功レスポンス
+      summary: /api/employees/{id}/skills
+  /api/employees/{id}/trainings:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+              - name: AWS基礎
+                status: 完了
+                trainingId: 1
+          description: 成功レスポンス
+      summary: /api/employees/{id}/trainings
+    put:
+      requestBody:
+        content:
+          application/json:
+            example:
+            - status: 完了
+              trainingId: 1
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                status: success
+          description: 成功レスポンス
+      summary: /api/employees/{id}/trainings
+  /api/login:
+    post:
+      requestBody:
+        content:
+          application/json:
+            example:
+              email: string
+              password: string
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                token: string
+          description: 成功レスポンス
+      summary: /api/login
+  /api/sites:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+              - id: 1
+                name: 東京本社
+          description: 成功レスポンス
+      summary: /api/sites
+  /api/skills:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+              - category: バックエンド
+                id: 1
+                name: Spring Boot
+          description: 成功レスポンス
+      summary: /api/skills
+  /api/trainings:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+              - id: 1
+                name: AWS基礎研修
+          description: 成功レスポンス
+      summary: /api/trainings
