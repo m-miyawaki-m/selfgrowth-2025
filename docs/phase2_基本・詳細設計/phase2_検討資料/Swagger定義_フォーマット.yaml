@@ -1,0 +1,43 @@
+openapi: 3.0.3
+info:
+  title: 社員管理 API
+  version: 1.0.0
+
+paths:
+  /login:
+    post:
+      summary: ログイン（JWT認証）
+
+  /employees:
+    get:
+      summary: 社員一覧取得
+    post:
+      summary: 社員の新規登録
+
+  /employees/{id}:
+    get:
+      summary: 社員詳細（スキル・研修・現場含む）
+    put:
+      summary: 社員情報の更新
+
+  /employees/{id}/skills:
+    get:
+      summary: スキル一覧取得
+    put:
+      summary: スキル情報の更新
+
+  /employees/{id}/trainings:
+    get:
+      summary: 研修履歴取得
+    put:
+      summary: 研修履歴の更新
+
+  /employees/{id}/sites:
+    get:
+      summary: 現場歴取得
+    put:
+      summary: 現場歴の更新
+
+  /dashboard/summary:
+    get:
+      summary: ダッシュボード集計（スキル分布・研修率など）

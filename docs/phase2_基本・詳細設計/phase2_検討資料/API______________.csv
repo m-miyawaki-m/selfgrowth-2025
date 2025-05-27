@@ -1,0 +1,17 @@
+No,メソッド,エンドポイント,リクエスト例,レスポンス例
+1,POST,/api/login,"{'email': 'string', 'password': 'string'}",{'token': 'string'}
+2,GET,/api/employees,"{'keyword': 'string?', 'page': 'int?'}","[{'id': 1, 'name': '山田 太郎', 'department': '開発部'}]"
+3,GET,/api/employees/{id},{'id': 'int (path)'},"{'id': 1, 'name': '山田 太郎', 'skills': [], 'trainings': [], 'sites': []}"
+4,POST,/api/employees,"{'name': 'string', 'email': 'string', 'hireDate': 'YYYY-MM-DD', 'skills': [], 'trainings': [], 'sites': []}","{'status': 'success', 'employeeId': 101}"
+5,PUT,/api/employees/{id},"{'id': 'int (path)', 'body': {'name': 'string', 'email': 'string'}}",{'status': 'success'}
+6,DELETE,/api/employees/{id},{'id': 'int (path)'},{'status': 'success'}
+7,GET,/api/employees/{id}/skills,{'id': 'int (path)'},"[{'skillId': 1, 'name': 'Vue.js', 'experience': '2年', 'proficiency': 4}]"
+8,PUT,/api/employees/{id}/skills,"{'id': 'int (path)', 'body': [{'skillId': 1, 'experience': '2年', 'proficiency': 4}]}",{'status': 'success'}
+9,GET,/api/employees/{id}/trainings,{'id': 'int (path)'},"[{'trainingId': 1, 'name': 'AWS基礎', 'status': '完了'}]"
+10,PUT,/api/employees/{id}/trainings,"{'id': 'int (path)', 'body': [{'trainingId': 1, 'status': '完了'}]}",{'status': 'success'}
+11,GET,/api/employees/{id}/sites,{'id': 'int (path)'},"[{'siteId': 1, 'name': '東京本社', 'startDate': '2023-01-01'}]"
+12,PUT,/api/employees/{id}/sites,"{'id': 'int (path)', 'body': [{'siteId': 1, 'startDate': '2023-01-01'}]}",{'status': 'success'}
+13,GET,/api/skills,{},"[{'id': 1, 'name': 'Spring Boot', 'category': 'バックエンド'}]"
+14,GET,/api/trainings,{},"[{'id': 1, 'name': 'AWS基礎研修'}]"
+15,GET,/api/sites,{},"[{'id': 1, 'name': '東京本社'}]"
+16,GET,/api/dashboard/summary,{},"{'skillDistribution': {'FE': 10}, 'trainingCompletionRate': 80}"
