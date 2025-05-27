@@ -1,0 +1,103 @@
+
+@startuml ER diagram
+
+' === 社員基本情報 ===
+entity "Employee\n【社員】" as Employee {
+  * id : int <<PK>>
+  --
+  name : string
+  email : string
+  hire_date : date
+  site_id : int <<FK>> -- 現在の配属現場
+}
+
+' === 現場 ===
+entity "Site\n【現場】" as Site {
+  * id : int <<PK>>
+  --
+  name : string
+  location : string
+}
+
+' === 現場履歴 ===
+entity "EmployeeSiteHistory\n【社員現場履歴】" as EmployeeSiteHistory {
+  * id : int <<PK>>
+  --
+  employee_id : int <<FK>>
+  site_id : int <<FK>>
+  start_date : date
+  end_date : date
+  role : string
+  task_summary : string
+  tools : string
+  note : string
+  company_eval : string
+  recommended : string
+  manager_note : string
+}
+
+' === 研修マスタ ===
+entity "Training\n【研修】" as Training {
+  * id : int <<PK>>
+  --
+  name : string
+  description : string
+  start_date : date
+  end_date : date
+}
+
+' === 研修履歴 ===
+entity "EmployeeTraining\n【社員研修履歴】" as EmployeeTraining {
+  * id : int <<PK>>
+  --
+  employee_id : int <<FK>>
+  training_id : int <<FK>>
+  status : string
+  score : int
+  report_submitted : bool
+  comment : string
+  understanding : string
+  feedback : string
+}
+
+' === スキルカテゴリ ===
+entity "SkillCategory\n【スキルカテゴリ】" as SkillCategory {
+  * id : int <<PK>>
+  --
+  name : string
+}
+
+' === スキルマスタ ===
+entity "Skill\n【スキル】" as Skill {
+  * id : int <<PK>>
+  --
+  name : string
+  category_id : int <<FK>>
+}
+
+' === 社員スキル評価 ===
+entity "EmployeeSkill\n【社員スキル評価】" as EmployeeSkill {
+  * id : int <<PK>>
+  --
+  employee_id : int <<FK>>
+  skill_id : int <<FK>>
+  experience : string
+  proficiency : int
+  note : string
+  eval_score : int
+  eval_comment : string
+  evaluator : string
+  eval_date : date
+}
+
+' === リレーション定義 ===
+Employee ||--o{ EmployeeSiteHistory : 配属履歴
+Site ||--o{ EmployeeSiteHistory : 所属先
+Site ||--o{ Employee : 現在の配属
+Employee ||--o{ EmployeeTraining : 研修受講
+Training ||--o{ EmployeeTraining : 対象研修
+Employee ||--o{ EmployeeSkill : 技術保有
+Skill ||--o{ EmployeeSkill : 保有スキル
+SkillCategory ||--o{ Skill : 属する分類
+
+@enduml
