@@ -14,7 +14,35 @@ services:
     command:
       --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     volumes:
-      - ./mysql:/docker-entrypoint-initdb.d  # init.sql 置き場（任意）
+      - ./mysql:/docker-entrypoint-initdb.d
+    networks:
+      - selfgrowth-net
+
+  backend:
+    build:
+      context: ../backend-src
+      dockerfile: ../docker/backend/Dockerfile-backend
+    container_name: selfgrowth-backend
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/selfgrowth_db?useUnicode=true&characterEncoding=utf8mb4&serverTimezone=Asia/Tokyo
+      SPRING_DATASOURCE_USERNAME: devuser
+      SPRING_DATASOURCE_PASSWORD: devpass
+    networks:
+      - selfgrowth-net
+
+  frontend:
+    build:
+      context: ../frontend-src
+      dockerfile: ../docker/frontend/Dockerfile-frontend
+    container_name: selfgrowth-frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
     networks:
       - selfgrowth-net
 

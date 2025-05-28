@@ -1,0 +1,15 @@
+
+# ベースイメージ（JDK入り）
+FROM eclipse-temurin:21-jdk
+
+# 作業ディレクトリ
+WORKDIR /app
+
+# jarファイルをコピー（build/libs配下を想定）
+COPY target/*.jar app.jar
+
+# ポート開放（Spring Bootのデフォルト）
+EXPOSE 8081
+
+# 実行コマンド
+ENTRYPOINT ["java", "-jar", "app.jar"]
