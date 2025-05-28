@@ -1,0 +1,23 @@
+# 自己成長プレゼン用2025 - Docker & Spring Boot 初期構成
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: selfgrowth-mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: selfgrowth_db
+      MYSQL_USER: devuser
+      MYSQL_PASSWORD: devpass
+      LANG: C.UTF-8
+    command:
+      --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./mysql:/docker-entrypoint-initdb.d  # init.sql 置き場（任意）
+    networks:
+      - selfgrowth-net
+
+networks:
+  selfgrowth-net:
+    driver: bridge
